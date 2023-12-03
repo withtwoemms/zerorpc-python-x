@@ -53,10 +53,10 @@ class DecoratorBase(object):
             args_spec = self._functor._zerorpc_args()
         except AttributeError:
             try:
-                args_spec = inspect.getargspec(self._functor)
+                args_spec = inspect.getfullargspec(self._functor)
             except TypeError:
                 try:
-                    args_spec = inspect.getargspec(self._functor.__call__)
+                    args_spec = inspect.getfullargspec(self._functor.__call__)
                 except (AttributeError, TypeError):
                     args_spec = None
         return args_spec
