@@ -28,7 +28,7 @@ from os import environ
 from pathlib import Path
 
 if sys.version_info < (3, 0):
-    execfile('zerorpc/version.py')
+    sys.exit(127)  # Python 2 is not supported
 else:
     exec(compile(open('zerorpc/version.py', encoding='utf8').read(), 'zerorpc/version.py', 'exec'))
 
@@ -44,12 +44,7 @@ requirements = [
     'future',
 ]
 
-if sys.version_info < (2, 7):
-    requirements.append('argparse')
-
-if sys.version_info < (2, 7):
-    requirements.append('gevent>=1.1.0,<1.2.0')
-elif sys.version_info < (3, 0):
+if sys.version_info < (3, 0):
     requirements.append('gevent>=1.0')
 else:
     requirements.append('gevent>=1.1')
@@ -79,9 +74,10 @@ setup(
         'Natural Language :: English',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ),
     entry_points={'console_scripts': ['zerorpc = zerorpc.cli:main']},
 )
